@@ -5,6 +5,7 @@ import Mycars from "./components/Mycars";
 class App extends Component {
   state = {
     titre: "Mon catalogue de voiture",
+    textTest: "Ceci est un test",
   };
 
   changeTitle = (e) => {
@@ -19,6 +20,18 @@ class App extends Component {
     });
   };
 
+  changeViaBind = (param) => {
+    this.setState({
+      titre: param,
+    });
+  };
+
+  changeViaInput = (e) => {
+    this.setState({
+      titre: e.target.value,
+    });
+  };
+
   render() {
     return (
       <div className="App">
@@ -27,9 +40,14 @@ class App extends Component {
         <button onClick={() => this.changeViaParam("Titre via le parametre")}>
           Via Param
         </button>
-        <button onClick={() => this.changeViaParam("Titre via le parametre")}>
+        <button onClick={this.changeViaBind.bind(this, "Titre via Bind")}>
           Via Bind
         </button>
+        <input
+          type="text"
+          onChange={this.changeViaInput}
+          value={this.state.titre}
+        />
       </div>
     );
   }
